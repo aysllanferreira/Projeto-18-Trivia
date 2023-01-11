@@ -5,4 +5,15 @@ const getToken = async () => {
   return token;
 };
 
-export default getToken;
+const getQuestions = async (token) => {
+  const quantity = 5;
+  const url = `https://opentdb.com/api.php?amount=${quantity}&token=${token}`;
+  const response = await fetch(url);
+  const { results } = await response.json();
+  return results;
+};
+
+export {
+  getToken,
+  getQuestions,
+};
