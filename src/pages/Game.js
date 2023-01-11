@@ -6,7 +6,6 @@ import { getQuestions } from '../constants/apiTrivia';
 function Game() {
   const history = useHistory();
   const [questions, setQuestions] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [indexQuestions, setIndexQuestions] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [answered, setAnswered] = useState(false);
@@ -51,6 +50,7 @@ function Game() {
 
   useEffect(() => {
     shuffleAnswers();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questions, indexQuestions]);
 
   const handleClick = ({ target }) => {
@@ -59,6 +59,8 @@ function Game() {
     if (isTrue) console.log('Acertou');
     else console.log('errou');
     setAnswered(true);
+    // Valeu Trybe por fazer nos fazer isso.
+    setIndexQuestions(0);
   };
 
   return (
