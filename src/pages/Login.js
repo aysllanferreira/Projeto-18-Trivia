@@ -42,6 +42,10 @@ function Login() {
     history.push('/game');
   };
 
+  const handleSettings = () => {
+    history.push('/settings');
+  };
+
   return (
     <div>
       <h1>Login</h1>
@@ -64,6 +68,14 @@ function Login() {
           disabled={ isDisabled }
         >
           Play
+        </button>
+
+        <button
+          type="button"
+          data-testid="btn-settings"
+          onClick={ handleSettings }
+        >
+          Settings
         </button>
       </form>
     </div>
