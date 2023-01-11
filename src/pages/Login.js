@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import getToken from '../constants/apiTrivia';
+import { setPlayers } from '../redux/reducers/player';
 
 function Login() {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -6,6 +10,9 @@ function Login() {
     name: '',
     email: '',
   });
+
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleInputChange = ({ target }) => {
     const { name, value } = target;
@@ -18,10 +25,27 @@ function Login() {
     else setIsDisabled(true);
   }, [player]);
 
+  const handleClick = async (event) => {
+    event.preventDefault();
+    const token = await getToken();
+    localStorage.setItem('token', token);
+
+    const { name, email } = player;
+    const playerInfo = {
+      name,
+      email,
+      score: 0,
+    };
+
+    dispatch(setPlayers(playerInfo));
+
+    history.push('/game');
+  };
+
   return (
     <div>
       <h1>Login</h1>
-      <form>
+      <form onSubmit={ handleClick }>
         <input
           type="text"
           data-testid="input-player-name"
@@ -35,7 +59,7 @@ function Login() {
           onChange={ handleInputChange }
         />
         <button
-          type="button"
+          type="submit"
           data-testid="btn-play"
           disabled={ isDisabled }
         >

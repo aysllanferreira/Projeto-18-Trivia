@@ -10,7 +10,7 @@ const userSlice = createSlice({
   name: 'player',
   initialState,
   reducers: {
-    setPlayer: (state, action) => {
+    setPlayers: (state, action) => {
       state.name = action.payload.name;
       state.email = action.payload.email;
       state.score = action.payload.score;
@@ -18,6 +18,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setPlayer } = userSlice.actions;
+export const { setPlayers } = userSlice.actions;
 
 export default userSlice.reducer;
