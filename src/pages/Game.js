@@ -9,6 +9,7 @@ function Game() {
   // eslint-disable-next-line no-unused-vars
   const [indexQuestions, setIndexQuestions] = useState(0);
   const [answers, setAnswers] = useState([]);
+  const [answered, setAnswered] = useState(false);
 
   useEffect(() => {
     const testaToken = async () => {
@@ -57,6 +58,7 @@ function Game() {
     const isTrue = id === 'correct-true';
     if (isTrue) console.log('Acertou');
     else console.log('errou');
+    setAnswered(true);
   };
 
   return (
@@ -72,6 +74,12 @@ function Game() {
             key={ index }
             data-testid={ answer.correct ? 'correct-answer' : `wrong-answer-${index}` }
             onClick={ handleClick }
+            style={
+              answered
+                ? { border: answer.correct
+                  ? '3px solid rgb(6, 240, 15)' : '3px solid red' }
+                : { border: '3px solid black' }
+            }
           >
             {answer.value}
           </button>
