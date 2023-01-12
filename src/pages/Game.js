@@ -59,7 +59,8 @@ function Game() {
   };
 
   useEffect(() => {
-    shuffleAnswers();
+    const magic = 4;
+    if (indexQuestions <= magic) shuffleAnswers();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questions, indexQuestions]);
 
@@ -110,6 +111,13 @@ function Game() {
     }
     return () => clearInterval(interval);
   }, [timer, dispatch, answered]);
+
+  useEffect(() => {
+    const magic = 5;
+    console.log(indexQuestions);
+    if (indexQuestions === magic) history.push('/feedback');
+    // history.push
+  }, [indexQuestions, history]);
 
   return (
     <div>

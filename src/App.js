@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Login, Game, Settings } from './pages';
+import { Login, Game, Settings, Feedback } from './pages';
+// import Feedback from './pages/Feedback';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route path="/game" component={ Game } />
         <Route path="/settings" component={ Settings } />
+        <Route path="/feedback" component={ Feedback } />
       </Switch>
     </div>
   );
