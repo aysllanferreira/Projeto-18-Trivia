@@ -18,6 +18,7 @@ function Game() {
   const [answers, setAnswers] = useState([]);
   const [answered, setAnswered] = useState(false);
   const [timeout, setTimeout] = useState(false);
+  const [isButtonVisible, setIsButtonVisible] = useState(false);
 
   useEffect(() => {
     const testaToken = async () => {
@@ -84,7 +85,17 @@ function Game() {
     } else console.log('errou');
     setAnswered(true);
     // Valeu Trybe por fazer nos fazer isso.
-    setIndexQuestions(0);
+    // setIndexQuestions(0);
+    setIsButtonVisible(true);
+  };
+
+  const handleNextClick = () => {
+    const magic = 30;
+    setIsButtonVisible(false);
+    setAnswered(false);
+    setTimeout(false);
+    dispatch(setTimer(magic));
+    setIndexQuestions(indexQuestions + 1);
   };
 
   useEffect(() => {
@@ -126,6 +137,14 @@ function Game() {
           </button>
         ))}
       </div>
+      { isButtonVisible && (
+        <button
+          type="button"
+          data-testid="btn-next"
+          onClick={ handleNextClick }
+        >
+          Next
+        </button>)}
     </div>
   );
 }
