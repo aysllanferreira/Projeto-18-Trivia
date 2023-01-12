@@ -1,10 +1,12 @@
 import React from 'react';
 import md5 from 'crypto-js/md5';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function Feedback() {
   const player = useSelector((state) => state.player);
   const maxAss = 3;
+  const history = useHistory();
   return (
     <div>
       <img
@@ -31,6 +33,14 @@ function Feedback() {
       <h2 data-testid="feedback-total-question">
         {player.assertions}
       </h2>
+
+      <button
+        type="button"
+        data-testid="btn-play-again"
+        onClick={ () => history.push('/') }
+      >
+        Play Again
+      </button>
     </div>
   );
 }
