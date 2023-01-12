@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import { getQuestions } from '../constants/apiTrivia';
+import { setTimer } from '../redux/reducers/timer';
 
 function Game() {
+  const { timer } = useSelector((state) => state.timer);
+
   const history = useHistory();
+  const dispatch = useDispatch();
+
   const [questions, setQuestions] = useState([]);
   const [indexQuestions, setIndexQuestions] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [answered, setAnswered] = useState(false);
+  const [timeout, setTimeout] = useState(false);
 
   useEffect(() => {
     const testaToken = async () => {
@@ -63,9 +70,23 @@ function Game() {
     setIndexQuestions(0);
   };
 
+  useEffect(() => {
+    const magic = 1000;
+    let interval = null;
+    if (timer > 0 && !answered) {
+      interval = setInterval(() => {
+        dispatch(setTimer(timer - 1));
+      }, magic);
+    } else {
+      setTimeout(true);
+    }
+    return () => clearInterval(interval);
+  }, [timer, dispatch, answered]);
+
   return (
     <div>
       <Header />
+      <p>{ timer }</p>
       <h1 data-testid="question-category">{questions[indexQuestions]?.category}</h1>
       <h2 data-testid="question-text">{questions[indexQuestions]?.question}</h2>
       <div data-testid="answer-options">
@@ -76,6 +97,7 @@ function Game() {
             key={ index }
             data-testid={ answer.correct ? 'correct-answer' : `wrong-answer-${index}` }
             onClick={ handleClick }
+            disabled={ timeout }
             style={
               answered
                 ? { border: answer.correct
