@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import { getQuestions } from '../constants/apiTrivia';
-import { setPlayers } from '../redux/reducers/player';
+import { setPlayers, setAssertions } from '../redux/reducers/player';
 import { setTimer } from '../redux/reducers/timer';
 
 function Game() {
@@ -19,6 +19,7 @@ function Game() {
   const [answered, setAnswered] = useState(false);
   const [timeout, setTimeout] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(false);
+  const [registerAssertions, setRegisterAssertions] = useState(0);
 
   useEffect(() => {
     const testaToken = async () => {
@@ -80,10 +81,9 @@ function Game() {
     if (isTrue) {
       const magic = 10;
       const resultado = magic + (timer * diff);
-      console.log(resultado);
       dispatch(setPlayers({ ...player, score: player.score + resultado }));
-      console.log(dificuldade);
-    } else console.log('errou');
+      setRegisterAssertions(registerAssertions + 1);
+    } else ;
     setAnswered(true);
     // Valeu Trybe por fazer nos fazer isso.
     // setIndexQuestions(0);
@@ -114,8 +114,11 @@ function Game() {
 
   useEffect(() => {
     const magic = 5;
-    console.log(indexQuestions);
-    if (indexQuestions === magic) history.push('/feedback');
+
+    if (indexQuestions === magic) {
+      dispatch(setAssertions(registerAssertions));
+      history.push('/feedback');
+    }
     // history.push
   }, [indexQuestions, history]);
 
