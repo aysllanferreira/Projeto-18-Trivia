@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 
 function Feedback() {
   const player = useSelector((state) => state.player);
+  const maxAss = 3;
   return (
-    <div data-testid="feedback-text">
+    <div>
       <img
         src={ `https://www.gravatar.com/avatar/${md5(player.email)}` }
         alt="avatar"
@@ -17,6 +18,11 @@ function Feedback() {
       <p data-testid="header-score">
         {player.score}
       </p>
+      {player.assertions >= maxAss ? (
+        <p data-testid="feedback-text">Well Done!</p>
+      ) : (
+        <p data-testid="feedback-text">Could be better...</p>
+      )}
     </div>
   );
 }
