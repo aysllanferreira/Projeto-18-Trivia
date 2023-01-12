@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import { getQuestions } from '../constants/apiTrivia';
+import { setPlayers } from '../redux/reducers/player';
 import { setTimer } from '../redux/reducers/timer';
 
 function Game() {
   const { timer } = useSelector((state) => state.timer);
+  const player = useSelector((state) => state.player);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -63,8 +65,23 @@ function Game() {
   const handleClick = ({ target }) => {
     const { id } = target;
     const isTrue = id === 'correct-true';
-    if (isTrue) console.log('Acertou');
-    else console.log('errou');
+    const dificuldade = questions[indexQuestions].difficulty;
+    let diff = 0;
+    if (dificuldade === 'easy') {
+      diff = 1;
+    } else if (dificuldade === 'medium') {
+      diff = 2;
+    } else {
+      const magic = 3;
+      diff = magic;
+    }
+    if (isTrue) {
+      const magic = 10;
+      const resultado = magic + (timer * diff);
+      console.log(resultado);
+      dispatch(setPlayers({ ...player, score: player.score + resultado }));
+      console.log(dificuldade);
+    } else console.log('errou');
     setAnswered(true);
     // Valeu Trybe por fazer nos fazer isso.
     setIndexQuestions(0);
