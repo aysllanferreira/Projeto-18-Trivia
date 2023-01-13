@@ -125,7 +125,7 @@ function Game() {
   return (
     <div>
       <Header />
-      <p>{ timer }</p>
+      <p data-testid="timer">{ timer }</p>
       <h1 data-testid="question-category">{questions[indexQuestions]?.category}</h1>
       <h2 data-testid="question-text">{questions[indexQuestions]?.question}</h2>
       <div data-testid="answer-options">
@@ -134,6 +134,7 @@ function Game() {
             type="button"
             id={ `correct-${answer.correct}` }
             key={ index }
+            placeholder={ questions[indexQuestions]?.difficulty }
             data-testid={ answer.correct ? 'correct-answer' : `wrong-answer-${index}` }
             onClick={ handleClick }
             disabled={ timeout }
