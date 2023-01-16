@@ -1,0 +1,74 @@
+@use '../styles/utils/variables.scss' as *;
+
+.Ranking{
+  text-align: center;
+
+  &__title{
+    font-size: 3rem;
+    font-weight: 700;
+    color: $tertiary-dark;
+    margin: 2rem 0;
+  }
+
+  &__button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    margin: 0 auto;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: $primary-dark;
+    color: $tertiary-dark;
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 2rem;
+
+    &:hover{
+      background-color: $primary-light;
+    }
+  }
+
+  &__table{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    margin: 0 auto;
+
+    &__header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 1rem;
+      background-color: $primary-dark;
+      color: $tertiary-dark;
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-bottom: 1px solid $primary-light;
+
+      td{
+        width: 33.33%;
+      }
+    }
+
+    &__body{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 1rem;
+      background-color: $primary;
+      border-bottom: 1px solid $primary-light;
+      color: $tertiary-dark;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+
+    }
+  }
+}

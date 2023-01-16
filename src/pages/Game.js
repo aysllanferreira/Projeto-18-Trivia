@@ -6,7 +6,6 @@ import { getQuestions } from '../constants/apiTrivia';
 import { setPlayers, setAssertions } from '../redux/reducers/player';
 import { setTimer } from '../redux/reducers/timer';
 import './Game.scss';
-import LogoQuestions from '../LogoQuestions.webp';
 
 function Game() {
   const { timer } = useSelector((state) => state.timer);
@@ -85,11 +84,13 @@ function Game() {
       const resultado = magic + (timer * diff);
       dispatch(setPlayers({ ...player, score: player.score + resultado }));
       setRegisterAssertions(registerAssertions + 1);
+      setTimeout(true);
     } else ;
     setAnswered(true);
     // Valeu Trybe por fazer nos fazer isso.
     // setIndexQuestions(0);
     setIsButtonVisible(true);
+    setTimeout(true);
   };
 
   const handleNextClick = () => {
@@ -110,6 +111,7 @@ function Game() {
       }, magic);
     } else {
       setTimeout(true);
+      setIsButtonVisible(true);
     }
     return () => clearInterval(interval);
   }, [timer, dispatch, answered]);
@@ -126,10 +128,15 @@ function Game() {
 
   return (
     <>
-      <img src={ LogoQuestions } alt="questions" className="LogoQuestions" />
+      <div className="img" />
+
       <div className="Game">
         <Header />
-        <p data-testid="timer" className="Game__timer">{ timer }</p>
+        <p data-testid="timer" className="Game__timer">
+          Time:
+          {' '}
+          {timer}
+        </p>
         <h1
           data-testid="question-category"
           className="Game__category"
@@ -173,6 +180,7 @@ function Game() {
             type="button"
             data-testid="btn-next"
             onClick={ handleNextClick }
+            className="Game__next"
           >
             Next
           </button>)}
