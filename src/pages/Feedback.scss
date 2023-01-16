@@ -1,0 +1,65 @@
+@use '../styles/utils/variables.scss' as *;
+
+.Feedback{
+  border: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+
+  &__message{
+    text-align: center;
+    font-size: 2.5rem;
+  }
+
+  &__results{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+
+    label{
+      font-size: 1.5rem;
+      font-weight: 500;
+      text-align: center;
+    }
+  }
+
+  &__buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+    button{
+      padding: 12px;
+      font-size: 1.2rem;
+      width: 130px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    &__play{
+      background-color: $secondary-dark;
+      color: $text;
+      cursor: pointer;
+      font-weight: 600;
+
+      &:hover{
+        background-color: $secondary;
+      }
+    }
+
+    &__ranking{
+      background-color: $tertiary;
+      color: $text-dark;
+      cursor: pointer;
+      font-weight: 600;
+
+      &:hover{
+        background-color: $tertiary-dark;
+      }
+    }
+  }
+}

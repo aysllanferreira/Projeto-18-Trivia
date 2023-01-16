@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-max-depth */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -5,6 +8,7 @@ import { getToken } from '../constants/apiTrivia';
 import { setPlayers } from '../redux/reducers/player';
 import './Login.scss';
 import logoTrivia from '../trivia.png';
+import ModalSettings from '../components/ModalSettings';
 
 function Login() {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -12,6 +16,7 @@ function Login() {
     name: '',
     email: '',
   });
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -42,10 +47,6 @@ function Login() {
     dispatch(setPlayers(playerInfo));
 
     history.push('/game');
-  };
-
-  const handleSettings = () => {
-    history.push('/settings');
   };
 
   return (
@@ -82,7 +83,7 @@ function Login() {
           <button
             type="button"
             data-testid="btn-settings"
-            onClick={ handleSettings }
+            onClick={ () => setSettingsOpen(!settingsOpen) }
             className="Login__form__buttons__settings"
           >
             Settings
@@ -90,6 +91,13 @@ function Login() {
         </div>
 
       </form>
+
+      { settingsOpen && (
+        <ModalSettings
+          settingsOpen={ settingsOpen }
+          setSettingsOpen={ setSettingsOpen }
+        />
+      )}
     </div>
   );
 }
