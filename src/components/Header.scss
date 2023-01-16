@@ -3,7 +3,7 @@
 .Header{
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 100px;
     align-items: center;
     padding: 30px;
     justify-content: center;
@@ -20,5 +20,10 @@
       font-size: 1.5rem;
       font-weight: 500;
       text-align: center;
+    }
+
+    @media (max-width: 768px){
+      justify-content: space-between;
+      gap: 0;
     }
 }
