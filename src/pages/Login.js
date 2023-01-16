@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getToken } from '../constants/apiTrivia';
 import { setPlayers } from '../redux/reducers/player';
+import './Login.scss';
+import logoTrivia from '../trivia.png';
 
 function Login() {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -47,36 +49,46 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={ handleClick }>
+    <div className="Login">
+
+      <img src={ logoTrivia } alt="logo" className="Login__title" />
+
+      <form onSubmit={ handleClick } className="Login__form">
         <input
           type="text"
           data-testid="input-player-name"
           name="name"
           onChange={ handleInputChange }
+          placeholder="Name"
         />
         <input
           type="text"
           data-testid="input-gravatar-email"
           name="email"
           onChange={ handleInputChange }
+          placeholder="Email"
         />
-        <button
-          type="submit"
-          data-testid="btn-play"
-          disabled={ isDisabled }
-        >
-          Play
-        </button>
 
-        <button
-          type="button"
-          data-testid="btn-settings"
-          onClick={ handleSettings }
-        >
-          Settings
-        </button>
+        <div className="Login__form__buttons">
+          <button
+            type="submit"
+            data-testid="btn-play"
+            disabled={ isDisabled }
+            className="Login__form__buttons__play"
+          >
+            Play
+          </button>
+
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ handleSettings }
+            className="Login__form__buttons__settings"
+          >
+            Settings
+          </button>
+        </div>
+
       </form>
     </div>
   );
