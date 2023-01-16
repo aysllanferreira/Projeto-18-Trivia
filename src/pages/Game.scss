@@ -1,0 +1,53 @@
+@use '../styles/utils/variables.scss' as *;
+
+.LogoQuestions {
+  width: 100%;
+}
+
+.Game {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  max-width: 50%;
+  margin: auto;
+  margin-top: 50vh;
+  transform: translateY(-50%);
+  box-shadow: 5px 5px 10px 2px rgba($color: #000000, $alpha: 0.8);
+
+  &__timer {
+    font-size: 50px;
+  }
+
+  &__category {
+    max-width: 95%;
+    margin: auto;
+  }
+
+  &__questions {
+    max-width: 90%;
+    margin: auto;
+  }
+
+  &__buttons {
+    display: flex;
+    background-color: $secondary-light;
+    opacity: 0.4;
+    color: $text-dark;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    max-width: 90%;
+    margin: 10px auto;
+    width: 100%;
+    padding: auto;
+    text-align: center;
+    font-size: 1.3rem;
+    box-shadow: 5px 5px 10px 2px rgba($color: #000000, $alpha: 0.8);
+    &:hover{
+    background-color: $secondary-dark;
+  }
+
+  }
+}
+

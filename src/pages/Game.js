@@ -5,6 +5,8 @@ import Header from '../components/Header';
 import { getQuestions } from '../constants/apiTrivia';
 import { setPlayers, setAssertions } from '../redux/reducers/player';
 import { setTimer } from '../redux/reducers/timer';
+import './Game.scss';
+import LogoQuestions from '../LogoQuestions.webp';
 
 function Game() {
   const { timer } = useSelector((state) => state.timer);
@@ -123,41 +125,59 @@ function Game() {
   }, [indexQuestions, history]);
 
   return (
-    <div>
-      <Header />
-      <p data-testid="timer">{ timer }</p>
-      <h1 data-testid="question-category">{questions[indexQuestions]?.category}</h1>
-      <h2 data-testid="question-text">{questions[indexQuestions]?.question}</h2>
-      <div data-testid="answer-options">
-        {answers.map((answer, index) => (
+    <>
+      <img src={ LogoQuestions } alt="questions" className="LogoQuestions" />
+      <div className="Game">
+        <Header />
+        <p data-testid="timer" className="Game__timer">{ timer }</p>
+        <h1
+          data-testid="question-category"
+          className="Game__category"
+        >
+          {questions[indexQuestions]?.category}
+
+        </h1>
+        <h2
+          data-testid="question-text"
+          className="Game__questions"
+        >
+          {questions[indexQuestions]?.question}
+
+        </h2>
+        <div
+          data-testid="answer-options"
+        >
+          {answers.map((answer, index) => (
+            <button
+              className="Game__buttons"
+              type="button"
+              id={ `correct-${answer.correct}` }
+              key={ index }
+              placeholder={ questions[indexQuestions]?.difficulty }
+              data-testid={ answer.correct ? 'correct-answer' : `wrong-answer-${index}` }
+              onClick={ handleClick }
+              disabled={ timeout }
+              style={
+                answered
+                  ? { border: answer.correct
+                    ? '3px solid rgb(6, 240, 15)' : '3px solid red' }
+                  : { border: '3px solid black' }
+              }
+            >
+              {answer.value}
+            </button>
+          ))}
+        </div>
+        { isButtonVisible && (
           <button
             type="button"
-            id={ `correct-${answer.correct}` }
-            key={ index }
-            placeholder={ questions[indexQuestions]?.difficulty }
-            data-testid={ answer.correct ? 'correct-answer' : `wrong-answer-${index}` }
-            onClick={ handleClick }
-            disabled={ timeout }
-            style={
-              answered
-                ? { border: answer.correct
-                  ? '3px solid rgb(6, 240, 15)' : '3px solid red' }
-                : { border: '3px solid black' }
-            }
+            data-testid="btn-next"
+            onClick={ handleNextClick }
           >
-            {answer.value}
-          </button>
-        ))}
+            Next
+          </button>)}
       </div>
-      { isButtonVisible && (
-        <button
-          type="button"
-          data-testid="btn-next"
-          onClick={ handleNextClick }
-        >
-          Next
-        </button>)}
-    </div>
+    </>
   );
 }
 
