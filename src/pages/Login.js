@@ -9,6 +9,7 @@ import { setPlayers } from '../redux/reducers/player';
 import './Login.scss';
 import logoTrivia from '../trivia.png';
 import ModalSettings from '../components/ModalSettings';
+import Footer from '../components/Footer';
 
 function Login() {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -98,6 +99,7 @@ function Login() {
           setSettingsOpen={ setSettingsOpen }
         />
       )}
+      <Footer />
     </div>
   );
 }
